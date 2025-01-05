@@ -3,6 +3,8 @@ import librosa
 from datasets import load_dataset
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 
+device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+
 LANG_ID = "it"
 MODEL_ID = "jonatasgrosman/wav2vec2-large-xlsr-53-italian"
 SAMPLES = 10
