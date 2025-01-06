@@ -7,9 +7,8 @@ device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
 LANG_ID = "it"
 MODEL_ID = "jonatasgrosman/wav2vec2-large-xlsr-53-italian"
-SAMPLES = 10
 
-audio_path = "data/sample_short.mp3"
+audio_path = "examples/sample.mp3"
 speech_array, sampling_rate = librosa.load(audio_path, sr=16_000)
 print(f"Sample loaded: {speech_array.shape[0] / sampling_rate:.2f} seconds")
 
@@ -17,9 +16,10 @@ print('Loading model')
 processor = Wav2Vec2Processor.from_pretrained(MODEL_ID)
 model = Wav2Vec2ForCTC.from_pretrained(MODEL_ID)
 
+
 import time
 input_values = processor(speech_array, return_tensors="pt", sampling_rate=16000).input_values
-
+model, input_values = model.to(device), input_values.to(device)
 # calculate time
 start_time = time.time()
 with torch.no_grad():
