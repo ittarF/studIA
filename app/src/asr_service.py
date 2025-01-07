@@ -7,7 +7,7 @@ class ASR:
     def __init__(self, model_name):
         self.model_name = model_name
         self.model, self.processor = load_wav2vec2(asr_model_id[model_name])
-        self.device = torch.device("mps") # torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.model = self.model.to(self.device)
         
     def transcribe(self, audio_path, chunk_size=10, show=True):
@@ -36,8 +36,8 @@ class ASR:
 
 if __name__ == '__main__':
     asr = ASR("wav2vec2-sm")
-    audio_path = "/Users/giofratti/nerd/studIA/data/Farmacologia_4.m4a"
-    transcript = asr.transcribe(audio_path, chunk_size=10, show=True)
+    audio_path = "./data/Farmacologia4.m4a"
+    transcript = asr.transcribe(audio_path, chunk_size=30, show=True)
     # save transcript to file
     with open('transcript.txt', 'w') as f:
         f.write(transcript)
