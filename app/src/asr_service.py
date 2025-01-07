@@ -37,7 +37,7 @@ class ASR:
 if __name__ == '__main__':
     asr = ASR("wav2vec2-sm")
     audio_path = "./data/Farmacologia4.m4a"
-    transcript = asr.transcribe(audio_path, chunk_size=30, show=True)
+    transcript = asr.transcribe(audio_path, chunk_size=0, show=True)
     # save transcript to file
     with open('transcript.txt', 'w') as f:
         f.write(transcript)
