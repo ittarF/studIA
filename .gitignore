@@ -173,5 +173,5 @@ cython_debug/
 # Custom
 .note/
 data/
-# pynb/
+ipynb/
 models/
